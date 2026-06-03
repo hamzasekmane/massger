@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-const BEFORE = "public/images/before.jpg";
-const AFTER = "public/images/after.jpg";
+const BEFORE = "/images/before.jpg";
+const AFTER = "/images/after.jpg";
 
 export function BeforeAfter() {
   const [pos, setPos] = useState(50);
