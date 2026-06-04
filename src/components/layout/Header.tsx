@@ -3,7 +3,7 @@ import { Menu, ShoppingBag, Search, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "../../hooks/useCart";
 import { useScroll } from "../../hooks/useScroll";
-import { NAV_LINKS, SITE } from "../../lib/utils/constants";
+import { NAV_LINKS } from "../../lib/utils/constants";
 import { cn } from "../../lib/utils/cn";
 import { MobileMenu } from "./MobileMenu";
 
@@ -14,83 +14,90 @@ export function Header() {
 
   return (
     <>
-      {/* Announcement Bar */}
-      <div className="bg-gradient-to-r from-amber-600 to-rose-600 text-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-2.5 text-center text-xs font-semibold tracking-[0.5px] sm:text-sm">
-          <Sparkles className="h-4 w-4 shrink-0" />
+      {/* Announcement Bar - Luxury Warm Gold Gradient */}
+      <div className="bg-gradient-to-r from-gold-700 via-gold-600 to-gold-700 text-gold-50 border-b border-gold-600/20">
+        <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-2 text-center text-[11px] tracking-[0.15em] font-700 uppercase sm:text-xs">
+          <Sparkles className="h-3.5 w-3.5 text-gold-200 shrink-0 animate-pulse" />
           <span>
-            LIMITED TIME: <span className="font-bold">50% OFF</span> + FREE SHIPPING — ENDS SOON
+            Limited Time: <span className="text-white font-800 underline decoration-gold-300 underline-offset-4">50% Off</span> + Complimentary Shipping
           </span>
         </div>
       </div>
 
+      {/* Main Navigation Header */}
       <header
         className={cn(
-          "sticky top-0 z-50 transition-all duration-500",
+          "sticky top-0 z-50 transition-all duration-300",
           scrolled
-            ? "border-b border-stone-200 bg-white/90 backdrop-blur-2xl shadow-sm"
-            : "bg-white/70 backdrop-blur-md"
+            ? "border-b border-gold-100/60 bg-white/95 backdrop-blur-md shadow-sm"
+            : "bg-cream/90 backdrop-blur-sm"
         )}
       >
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="flex h-20 items-center justify-between">
-            {/* Left: Logo + Mobile Menu */}
-            <div className="flex items-center gap-6">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 sm:h-20 items-center justify-between">
+            
+            {/* Left Side: Brand Logo and Responsive Drawer Button */}
+            <div className="flex items-center gap-4 sm:gap-6">
               <button
                 onClick={() => setMenuOpen(true)}
-                className="rounded-2xl p-3 -ml-3 transition hover:bg-stone-100 lg:hidden"
-                aria-label="Open menu"
+                className="rounded-xl p-2.5 -ml-2.5 text-stone-700 transition-colors hover:bg-sand/60 lg:hidden"
+                aria-label="Open navigation menu"
               >
-                <Menu className="h-6 w-6 text-stone-700" />
+                <Menu className="h-5.5 w-5.5" />
               </button>
 
-              <Link to="/" className="group flex items-center gap-1">
-                <span className="font-display text-3xl font-semibold tracking-tighter text-stone-900">
+              <Link to="/" className="group flex items-center gap-1.5 select-none">
+                <span className="font-display text-2xl sm:text-3xl font-700 tracking-tighter text-stone-900 transition-colors group-hover:text-gold-700">
                   VALORA
                 </span>
-                <span className="text-4xl leading-none text-amber-500 group-hover:rotate-12 transition">✦</span>
+                <span className="text-xl leading-none text-gold-500 transform transition-transform duration-300 ease-out group-hover:rotate-45 group-hover:scale-110">
+                  ✦
+                </span>
               </Link>
             </div>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden items-center gap-10 lg:flex">
+            {/* Center Desktop Context Links */}
+            <nav className="hidden items-center gap-8 lg:flex">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="font-medium text-sm tracking-wide text-stone-600 hover:text-amber-600 transition-colors relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-amber-500 after:transition-all hover:after:w-full"
+                  className="font-sans font-600 text-[13px] tracking-widest uppercase text-stone-600 hover:text-gold-600 transition-colors duration-200 relative py-1"
                 >
                   {link.label}
                 </Link>
               ))}
             </nav>
 
-            {/* Right Side Actions */}
-            <div className="flex items-center gap-2">
+            {/* Right Side Interface Control Nodes */}
+            <div className="flex items-center gap-1">
               <button
-                className="hidden rounded-2xl p-3 text-stone-700 transition hover:bg-stone-100 hover:text-amber-600 sm:flex"
-                aria-label="Search"
+                className="hidden rounded-xl p-2.5 text-stone-700 transition-colors hover:bg-sand/60 hover:text-gold-600 sm:flex"
+                aria-label="Search Collection"
               >
-                <Search className="h-5 w-5" />
+                <Search className="h-4.5 w-4.5" />
               </button>
 
               <button
                 onClick={openCart}
-                className="relative rounded-2xl p-3 text-stone-700 transition hover:bg-stone-100 hover:text-amber-600"
-                aria-label="Open cart"
+                className="relative rounded-xl p-2.5 text-stone-700 transition-colors hover:bg-sand/60 hover:text-gold-600"
+                aria-label="Open bag details"
               >
-                <ShoppingBag className="h-5 w-5" />
+                <ShoppingBag className="h-4.5 w-4.5" />
+                
                 {totalQuantity > 0 && (
-                  <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-rose-500 px-1.5 text-[10px] font-bold text-white shadow">
+                  <span className="absolute right-1 top-1 flex h-4.5 min-w-4.5 items-center justify-center rounded-full bg-stone-900 px-1 text-[9px] font-700 text-white shadow-sm ring-2 ring-white animate-in zoom-in-50 duration-200">
                     {totalQuantity}
                   </span>
                 )}
               </button>
             </div>
+
           </div>
         </div>
       </header>
 
+      {/* Responsive Drawer Overlay */}
       <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
     </>
   );
