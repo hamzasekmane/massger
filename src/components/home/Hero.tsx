@@ -1,4 +1,5 @@
-import { motion, type Variants } from "framer-motion"; // ← add type Variants
+import { useState, useRef } from "react";
+import { motion, type Variants, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   Star,
@@ -9,6 +10,7 @@ import {
   Battery,
   Gauge,
   Play,
+  X,
   Activity,
   Heart,
   Zap,
@@ -47,7 +49,7 @@ const benefits = [
 ];
 
 /* ─── Animation ─── */
-const container: Variants = { // ← typed
+const container: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
@@ -55,10 +57,13 @@ const container: Variants = { // ← typed
   },
 };
 
-const item: Variants = { // ← typed
+const item: Variants = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
+
+/* ─── Demo Video URL (replace with your actual video) ─── */
+const DEMO_VIDEO_URL = "/images/demo.mp4"; // or external URL
 
 export function Hero({ product }: HeroProps) {
   const price = parseFloat(product.priceRange.minVariantPrice.amount);
@@ -70,9 +75,26 @@ export function Hero({ product }: HeroProps) {
     product.description?.slice(0, 150) ?? "Professional cupping therapy and heat massage for whole body relaxation.";
   const hasMoreDesc = (product.description?.length ?? 0) > 150;
 
+  // ─── Video modal state ───
+  const [showVideo, setShowVideo] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const openVideo = () => {
+    setShowVideo(true);
+  };
+
+  const closeVideo = () => {
+    setShowVideo(false);
+    // Pause video when closing
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
   return (
     <section id="top" className="relative overflow-hidden bg-stone-950">
-      {/* 🎬 Background Video */}
+      {/* 🎬 Background Video (existing) */}
       <video
         className="absolute inset-0 h-full w-full object-cover"
         autoPlay
@@ -102,7 +124,7 @@ export function Hero({ product }: HeroProps) {
             <motion.div variants={item}>
               <span className="inline-flex items-center gap-2 rounded-full bg-gold-500/15 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-gold-400 ring-1 ring-gold-500/30 backdrop-blur-sm">
                 <Star className="h-3.5 w-3.5 fill-gold-400 text-gold-400" />
-                #1 Best Seller
+                1 Best Seller
               </span>
             </motion.div>
 
@@ -177,9 +199,13 @@ export function Hero({ product }: HeroProps) {
                 </button>
               </Link>
 
-              <button className="flex w-full items-center justify-center gap-2 rounded-full bg-white/5 px-8 py-4 text-sm font-bold uppercase tracking-[0.12em] text-white backdrop-blur-md ring-1 ring-white/15 transition-all hover:bg-white/10 hover:ring-white/25 sm:w-auto">
+              {/* ▶️ Updated Watch Demo button — now opens video modal */}
+              <button
+                onClick={openVideo}
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-white/5 px-8 py-4 text-sm font-bold uppercase tracking-[0.12em] text-white backdrop-blur-md ring-1 ring-white/15 transition-all hover:bg-white/10 hover:ring-white/25 sm:w-auto"
+              >
                 <Play className="h-4 w-4 fill-white" />
-                Watch Demo
+                Watch Demo video
               </button>
             </motion.div>
 
@@ -194,7 +220,7 @@ export function Hero({ product }: HeroProps) {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT: Product Image */}
+          {/* RIGHT: Product Image (unchanged) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -260,6 +286,59 @@ export function Hero({ product }: HeroProps) {
           </div>
         </div>
       </div>
+
+      {/* ─── 🎥 VIDEO MODAL ─── */}
+      <AnimatePresence>
+        {showVideo && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-xl"
+            onClick={(e) => {
+              // Close if clicking the backdrop (not the video container)
+              if (e.target === e.currentTarget) closeVideo();
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative mx-4 w-full max-w-4xl rounded-2xl bg-black shadow-2xl"
+            >
+              {/* Close button */}
+              <button
+                onClick={closeVideo}
+                className="absolute -top-12 right-0 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white/70 transition-all hover:bg-white/20 hover:text-white sm:-top-14"
+                aria-label="Close video"
+              >
+                <X className="h-5 w-5" />
+              </button>
+
+              {/* Video player */}
+              <div className="aspect-video overflow-hidden rounded-2xl">
+                <video
+                  ref={videoRef}
+                  controls
+                  autoPlay
+                  playsInline
+                  className="h-full w-full object-cover"
+                >
+                  <source src={DEMO_VIDEO_URL} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+
+              {/* Optional caption */}
+              <p className="mt-3 text-center text-xs tracking-widest text-white/40">
+                SculptGlow™ Electric Gua Sha Massager Relaxing Demo Video
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
