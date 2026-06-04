@@ -121,15 +121,17 @@ export function useCart() {
     [shopifyCartId, items, removeItemLocal]
   );
 
-  const checkout = useCallback(() => {
-    if (shopifyCheckoutUrl) {
-      window.location.href = shopifyCheckoutUrl;
-    } else {
-      // Fallback for demo/unconfigured state
-      window.location.href = "/success";
-    }
-  }, [shopifyCheckoutUrl]);
-
+const checkout = useCallback(() => {
+  if (shopifyCheckoutUrl) {
+    const url = shopifyCheckoutUrl.replace(
+      /^https?:\/\/[^/]+/,
+      "https://valora-10106.myshopify.com"
+    );
+    window.location.href = url;
+  } else {
+    window.location.href = "/success";
+  }
+}, [shopifyCheckoutUrl]);
   const clearCart = useCallback(() => {
     clear();
     // Optionally abandon Shopify cart by clearing ID
