@@ -26,44 +26,43 @@ interface HeroProps {
   product: ShopifyProduct;
 }
 
-/* ─── Data ─── */
+/* ─── Data Configurations ─── */
 const productHighlights = [
-  { icon: Gauge, title: "9-Level Suction", sub: "Adjustment" },
-  { icon: Flame, title: "Intelligent", sub: "Heat Therapy" },
-  { icon: Battery, title: "1200mAh", sub: "Rechargeable" },
+  { icon: Gauge, title: "9-Level Suction", sub: "Adjustment Matrix" },
+  { icon: Flame, title: "Intelligent", sub: "Thermal Heat Relay" },
+  { icon: Battery, title: "1200mAh", sub: "Extended Life Cell" },
 ];
 
 const trustBadges = [
-  { icon: Shield, label: "30-Day Guarantee" },
-  { icon: Truck, label: "Free Shipping" },
-  { icon: RotateCcw, label: "Easy Returns" },
+  { icon: Shield, label: "30-Day Evaluation" },
+  { icon: Truck, label: "Complimentary Shipping" },
+  { icon: RotateCcw, label: "Unconditional Returns" },
 ];
 
 const benefits = [
-  { icon: Activity, title: "Deep Muscle Relaxation" },
-  { icon: Heart, title: "Improve Blood Circulation" },
-  { icon: Zap, title: "Reduce Body Fatigue" },
-  { icon: Droplets, title: "Support Lymphatic Drainage" },
-  { icon: Wind, title: "Relieve Stress & Tension" },
-  { icon: Home, title: "Spa Experience At Home" },
+  { icon: Activity, title: "Deep Kinetic Relaxation" },
+  { icon: Heart, title: "Subdermal Circulation" },
+  { icon: Zap, title: "Fatigue Decompression" },
+  { icon: Droplets, title: "Lymphatic Drainage Support" },
+  { icon: Wind, title: "Tension & Stress Release" },
+  { icon: Home, title: "At-Home Atelier Spa" },
 ];
 
-/* ─── Animation ─── */
+/* ─── Premium Motion Timings ─── */
 const container: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.2 },
+    transition: { staggerChildren: 0.06, delayChildren: 0.15 },
   },
 };
 
 const item: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 15 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
 };
 
-/* ─── Demo Video URL (replace with your actual video) ─── */
-const DEMO_VIDEO_URL = "/images/demo.mp4"; // or external URL
+const DEMO_VIDEO_URL = "/images/demo.mp4";
 
 export function Hero({ product }: HeroProps) {
   const price = parseFloat(product.priceRange.minVariantPrice.amount);
@@ -72,20 +71,15 @@ export function Hero({ product }: HeroProps) {
   const currency = product.priceRange.minVariantPrice.currencyCode;
 
   const description =
-    product.description?.slice(0, 150) ?? "Professional cupping therapy and heat massage for whole body relaxation.";
+    product.description?.slice(0, 150) ?? "Professional microcurrent therapy and heat massage built for whole body relaxation.";
   const hasMoreDesc = (product.description?.length ?? 0) > 150;
 
-  // ─── Video modal state ───
   const [showVideo, setShowVideo] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const openVideo = () => {
-    setShowVideo(true);
-  };
-
+  const openVideo = () => setShowVideo(true);
   const closeVideo = () => {
     setShowVideo(false);
-    // Pause video when closing
     if (videoRef.current) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
@@ -93,192 +87,203 @@ export function Hero({ product }: HeroProps) {
   };
 
   return (
-    <section id="top" className="relative overflow-hidden bg-stone-950">
-      {/* 🎬 Background Video (existing) */}
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster="/videos/hero-poster.jpg"
-        aria-hidden="true"
-      >
-        <source src="/images/vid.mp4" type="video/mp4" />
-        <source src="/videos/hero-bg.webm" type="video/webm" />
-      </video>
+    <section id="top" className="relative overflow-hidden bg-stone-950 selection:bg-gold-500 selection:text-stone-950">
+      
+      {/* Immersive Atmospheric Video Canvas Layer */}
+      <div className="absolute inset-0 pointer-events-none z-0 select-none overflow-hidden">
+        <video
+          className="absolute inset-0 h-full w-full object-cover opacity-35 filter brightness-[0.4] contrast-[1.05]"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/videos/hero-poster.jpg"
+          aria-hidden="true"
+        >
+          <source src="/images/vid.mp4" type="video/mp4" />
+          <source src="/videos/hero-bg.webm" type="video/webm" />
+        </video>
+      </div>
 
-      {/* 🌑 Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-stone-950/95 via-stone-950/80 to-stone-950/40" />
-      <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-stone-950/30" />
+      {/* Luxury Radial Lighting Overlays */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-r from-stone-950 via-stone-950/85 to-transparent lg:w-3/5" />
+      <div className="absolute inset-0 z-0 bg-gradient-to-t from-stone-950 via-transparent to-stone-950/40" />
 
-      {/* ─── Hero Content ─── */}
+      {/* Main Container Workspace */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid min-h-[85vh] items-center gap-12 py-16 lg:grid-cols-2 lg:py-20">
+        <div className="grid min-h-[90vh] items-center gap-16 py-20 lg:grid-cols-12 lg:py-24">
           
-          {/* LEFT: Copy */}
-          <motion.div variants={container} initial="hidden" animate="show" className="max-w-xl">
+          {/* LEFT COLUMN: Editorial Configuration Content */}
+          <motion.div variants={container} initial="hidden" animate="show" className="max-w-xl lg:col-span-7 space-y-7">
             
-            {/* Badge */}
+            {/* Identity Badge Component */}
             <motion.div variants={item}>
-              <span className="inline-flex items-center gap-2 rounded-full bg-gold-500/15 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-gold-400 ring-1 ring-gold-500/30 backdrop-blur-sm">
-                <Star className="h-3.5 w-3.5 fill-gold-400 text-gold-400" />
-                1 Best Seller
+              <span className="inline-flex items-center gap-2 rounded-md bg-gold-400/10 border border-gold-500/20 px-3.5 py-1.5 text-[9px] font-800 uppercase tracking-[0.25em] text-gold-400 backdrop-blur-md">
+                <Star className="h-3 w-3 fill-gold-400 text-gold-400" />
+                No·1 Medical-Grade Wellness Device
               </span>
             </motion.div>
 
-            {/* Headline */}
-            <motion.h1
-              variants={item}
-              className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-[3.4rem]"
-            >
-              Smart Electric <br />
-              <span className="text-gold-400">Gua Sha Massager</span>
-            </motion.h1>
+            {/* Title Display Header */}
+            <div className="space-y-4">
+              <motion.h1
+                variants={item}
+                className="font-display text-4xl font-700 leading-[1.1] tracking-tighter text-white sm:text-5xl lg:text-6xl uppercase"
+              >
+                Smart Electric <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-300 via-gold-400 to-gold-200">
+                  Gua Sha Massager
+                </span>
+              </motion.h1>
 
-            {/* Subheadline */}
-            <motion.p variants={item} className="mt-5 max-w-md text-base leading-relaxed text-stone-300 sm:text-lg">
-              {description}
-              {hasMoreDesc ? "..." : ""}
-            </motion.p>
+              <motion.p variants={item} className="max-w-md font-sans font-400 text-sm sm:text-base leading-relaxed text-stone-300/90">
+                {description}
+                {hasMoreDesc && "..."}
+              </motion.p>
+            </div>
 
-            {/* Feature Pills */}
-            <motion.div variants={item} className="mt-7 flex flex-wrap gap-3">
+            {/* Performance Parameters Matrix */}
+            <motion.div variants={item} className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {productHighlights.map((f) => (
                 <div
                   key={f.title}
-                  className="flex items-center gap-3 rounded-xl bg-white/5 px-4 py-3 backdrop-blur-md ring-1 ring-white/10"
+                  className="flex items-center gap-3.5 rounded-xl bg-white/[0.03] p-3.5 backdrop-blur-xl border border-white/5 shadow-2xs"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold-500/15 text-gold-400 ring-1 ring-gold-500/20">
-                    <f.icon className="h-[18px] w-[18px]" />
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gold-500/10 text-gold-400 border border-gold-500/20">
+                    <f.icon className="h-4 w-4" strokeWidth={1.75} />
                   </span>
-                  <span className="text-[13px] leading-tight">
-                    <span className="block font-bold text-white">{f.title}</span>
-                    <span className="text-stone-400">{f.sub}</span>
+                  <span className="text-left leading-tight">
+                    <span className="block font-700 text-xs text-white tracking-wide">{f.title}</span>
+                    <span className="text-[10px] text-stone-400 font-500 tracking-wide mt-0.5 block">{f.sub}</span>
                   </span>
                 </div>
               ))}
             </motion.div>
 
-            {/* Rating */}
-            <motion.div variants={item} className="mt-6 flex items-center gap-3">
+            {/* Social Proof Dynamic Score */}
+            <motion.div variants={item} className="flex items-center gap-3 bg-white/[0.02] border border-white/5 rounded-full px-4 py-2 w-max backdrop-blur-xs">
               <div className="flex gap-0.5">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-gold-400 text-gold-400" />
+                  <Star key={i} className="h-3.5 w-3.5 fill-gold-400 text-gold-400" />
                 ))}
               </div>
-              <span className="text-sm font-semibold text-stone-200">
-                4.9/5 <span className="text-stone-500">(8,420+ Reviews)</span>
+              <span className="text-xs font-700 tracking-wider text-stone-200">
+                4.9/5 <span className="text-stone-500 font-500 ml-1">({(8420).toLocaleString()}+ Reviews)</span>
               </span>
             </motion.div>
 
-            {/* Price */}
-            <motion.div variants={item} className="mt-6 flex items-baseline gap-3">
-              <span className="font-display text-4xl font-bold text-white">
+            {/* Pricing Structures Segment */}
+            <motion.div variants={item} className="flex items-center gap-4 pt-2">
+              <span className="font-sans font-700 text-4xl tracking-tight text-white">
                 {formatPrice(price, currency)}
               </span>
               {compareAt > 0 && (
-                <>
-                  <span className="text-lg text-stone-500 line-through">
+                <div className="flex items-center gap-2.5">
+                  <span className="text-lg font-500 text-stone-500 line-through">
                     {formatPrice(compareAt, currency)}
                   </span>
-                  <span className="rounded-full bg-red-500/20 px-2.5 py-0.5 text-xs font-bold text-red-300 ring-1 ring-red-500/30">
+                  <span className="rounded-md bg-red-500/10 px-2.5 py-0.5 text-[10px] font-800 uppercase tracking-widest text-red-400 border border-red-500/20">
                     Save {discount}%
                   </span>
-                </>
+                </div>
               )}
             </motion.div>
 
-            {/* CTAs */}
-            <motion.div variants={item} className="mt-6 flex flex-col gap-3 sm:flex-row">
+            {/* Action Checkout Call-to-Actions */}
+            <motion.div variants={item} className="flex flex-col gap-3.5 sm:flex-row pt-2">
               <Link to={`/products/${product.handle}`} className="flex-1 sm:flex-none">
-                <button className="group flex w-full items-center justify-center gap-2 rounded-full bg-gold-500 px-8 py-4 text-sm font-bold uppercase tracking-[0.12em] text-stone-950 shadow-xl shadow-gold-500/20 transition-all hover:bg-gold-400 hover:shadow-gold-500/30 hover:-translate-y-0.5">
-                  Buy Now
-                  <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                <button className="group flex w-full items-center justify-center gap-2.5 rounded-xl bg-white px-8 h-14 text-xs font-800 uppercase tracking-[0.15em] text-stone-950 shadow-xl shadow-white/5 transition-all duration-300 hover:bg-gold-400 hover:shadow-gold-500/10 cursor-pointer">
+                  <span>Explore Atelier Collection</span>
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={2.5} />
                 </button>
               </Link>
 
-              {/* ▶️ Updated Watch Demo button — now opens video modal */}
               <button
                 onClick={openVideo}
-                className="flex w-full items-center justify-center gap-2 rounded-full bg-white/5 px-8 py-4 text-sm font-bold uppercase tracking-[0.12em] text-white backdrop-blur-md ring-1 ring-white/15 transition-all hover:bg-white/10 hover:ring-white/25 sm:w-auto"
+                className="flex w-full items-center justify-center gap-2.5 rounded-xl bg-white/[0.04] px-8 h-14 text-xs font-800 uppercase tracking-[0.15em] text-white backdrop-blur-md border border-white/10 transition-all duration-300 hover:bg-white/[0.08] hover:border-white/20 sm:w-auto cursor-pointer"
               >
-                <Play className="h-4 w-4 fill-white" />
-                Watch Demo video
+                <Play className="h-3.5 w-3.5 fill-white" />
+                <span>Watch Experience Film</span>
               </button>
             </motion.div>
 
-            {/* Trust */}
-            <motion.div variants={item} className="mt-7 flex flex-wrap gap-x-6 gap-y-3">
+            {/* Quality Seals Sub-shelf */}
+            <motion.div variants={item} className="flex flex-wrap gap-x-6 gap-y-3 pt-3 border-t border-white/5">
               {trustBadges.map((t) => (
-                <span key={t.label} className="flex items-center gap-2 text-xs font-semibold text-stone-400">
-                  <t.icon className="h-4 w-4 text-gold-400" />
+                <span key={t.label} className="flex items-center gap-2 text-[11px] font-600 tracking-wide text-stone-400">
+                  <t.icon className="h-3.5 w-3.5 text-gold-400/90" strokeWidth={2} />
                   {t.label}
                 </span>
               ))}
             </motion.div>
           </motion.div>
 
-          {/* RIGHT: Product Image (unchanged) */}
+          {/* RIGHT COLUMN: Asymmetric Dynamic Product Display Showcase */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            className="relative flex items-center justify-center"
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            className="relative flex items-center justify-center lg:col-span-5"
           >
-            {/* Discount Badge */}
+            {/* Dynamic Floating Discount Overlay */}
             {discount > 0 && (
               <motion.div
-                initial={{ scale: 0, rotate: -12 }}
-                animate={{ scale: 1, rotate: 6 }}
-                transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.8 }}
-                className="absolute right-4 top-4 z-20 flex h-20 w-20 flex-col items-center justify-center rounded-full bg-gold-500 text-stone-950 shadow-lg sm:h-24 sm:w-24"
+                initial={{ scale: 0, rotate: -10 }}
+                animate={{ scale: 1, rotate: 4 }}
+                transition={{ type: "spring", stiffness: 180, damping: 18, delay: 0.7 }}
+                className="absolute -right-2 top-2 z-20 flex h-22 w-22 flex-col items-center justify-center rounded-full bg-gold-400 text-stone-950 shadow-2xl border-4 border-stone-950 select-none"
               >
-                <span className="text-[10px] font-bold uppercase tracking-wider opacity-90">Up To</span>
-                <span className="text-2xl font-extrabold leading-none sm:text-3xl">{discount}%</span>
-                <span className="text-[10px] font-bold uppercase tracking-wider opacity-90">Off</span>
+                <span className="text-[9px] font-800 uppercase tracking-widest opacity-80">Special</span>
+                <span className="text-2xl font-900 leading-none tracking-tight">-{discount}%</span>
+                <span className="text-[9px] font-800 uppercase tracking-widest opacity-80">Off Limit</span>
               </motion.div>
             )}
 
-            {/* Image Container */}
-            <div className="relative w-full rounded-[2.5rem] bg-white/5 p-8 shadow-2xl shadow-black/40 ring-1 ring-white/10 backdrop-blur-sm sm:p-12">
+            {/* Sculptural Base Geometric Frame Container */}
+            <div className="relative w-full rounded-3xl bg-gradient-to-b from-white/[0.04] to-transparent p-6 sm:p-10 shadow-3xl shadow-black/80 border border-white/10 backdrop-blur-md overflow-hidden group">
+              
+              {/* Premium Background Lighting Mesh Spark */}
+              <div className="absolute top-0 left-1/4 h-36 w-36 bg-gold-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-gold-500/15 transition-all duration-500" />
+
               {product.featuredImage && (
                 <motion.img
                   src={product.featuredImage.url}
                   alt={product.featuredImage.altText ?? product.title}
-                  className="relative z-10 h-auto w-full object-contain drop-shadow-2xl"
+                  className="relative z-10 h-auto w-full object-contain filter drop-shadow-[0_25px_35px_rgba(0,0,0,0.6)] select-none pointer-events-none"
                   loading="eager"
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                 />
               )}
 
-              {/* Red/Blue magnetic glow at base */}
-              <div className="absolute bottom-8 left-1/2 z-0 flex -translate-x-1/2 gap-8 opacity-60 blur-2xl">
-                <div className="h-8 w-8 rounded-full bg-red-500 sm:h-10 sm:w-10" />
-                <div className="h-8 w-8 rounded-full bg-blue-600 sm:h-10 sm:w-10" />
+              {/* Integrated Sonic Energy Therapy LED Aura Rings */}
+              <div className="absolute bottom-4 left-1/2 z-0 flex -translate-x-1/2 gap-12 opacity-40 blur-2xl pointer-events-none select-none">
+                <div className="h-10 w-10 rounded-full bg-red-500 animate-pulse" />
+                <div className="h-10 w-10 rounded-full bg-blue-500 animate-pulse [animation-delay:1.5s]" />
               </div>
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* ─── Benefits Bar ─── */}
-      <div className="relative z-10 border-t border-white/10 bg-stone-950/80 backdrop-blur-md">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 gap-y-6 md:grid-cols-3 lg:grid-cols-6">
+      {/* ─── Horizontal Running Benefits Strip ─── */}
+      <div className="relative z-10 border-t border-white/5 bg-stone-950/60 backdrop-blur-xl">
+        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-6 items-start">
             {benefits.map((b, i) => (
               <motion.div
                 key={b.title}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="flex flex-col items-center gap-2 text-center"
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ delay: i * 0.06, duration: 0.5 }}
+                className="flex flex-col items-center gap-3 text-center group"
               >
-                <b.icon className="h-6 w-6 text-gold-400" />
-                <span className="text-xs font-semibold uppercase tracking-wider text-stone-400">
+                <div className="text-stone-500 group-hover:text-gold-400 transition-colors duration-300">
+                  <b.icon className="h-5 w-5" strokeWidth={1.5} />
+                </div>
+                <span className="text-[10px] font-700 uppercase tracking-widest text-stone-400 leading-normal max-w-[120px] block">
                   {b.title}
                 </span>
               </motion.div>
@@ -287,38 +292,37 @@ export function Hero({ product }: HeroProps) {
         </div>
       </div>
 
-      {/* ─── 🎥 VIDEO MODAL ─── */}
+      {/* ─── Luxury Video Immersive Cinema Modal ─── */}
       <AnimatePresence>
         {showVideo && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-xl"
+            transition={{ duration: 0.35 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-stone-950/90 backdrop-blur-2xl px-4"
             onClick={(e) => {
-              // Close if clicking the backdrop (not the video container)
               if (e.target === e.currentTarget) closeVideo();
             }}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative mx-4 w-full max-w-4xl rounded-2xl bg-black shadow-2xl"
+              initial={{ scale: 0.96, opacity: 0, y: 10 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.96, opacity: 0, y: 10 }}
+              transition={{ type: "spring", damping: 28, stiffness: 260 }}
+              className="relative w-full max-w-4xl rounded-2xl bg-stone-900 border border-white/10 shadow-3xl overflow-hidden"
             >
-              {/* Close button */}
+              {/* Modal Node Dismiss Overlay Triggers */}
               <button
                 onClick={closeVideo}
-                className="absolute -top-12 right-0 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white/70 transition-all hover:bg-white/20 hover:text-white sm:-top-14"
-                aria-label="Close video"
+                className="absolute top-4 right-4 z-50 flex h-9 w-9 items-center justify-center rounded-full bg-black/50 text-white/80 border border-white/10 transition-all duration-200 hover:bg-black/80 hover:text-white cursor-pointer"
+                aria-label="Dismiss experience clip window"
               >
-                <X className="h-5 w-5" />
+                <X className="h-4 w-4" strokeWidth={2} />
               </button>
 
-              {/* Video player */}
-              <div className="aspect-video overflow-hidden rounded-2xl">
+              {/* Responsive Video Window Core */}
+              <div className="aspect-video w-full bg-black relative">
                 <video
                   ref={videoRef}
                   controls
@@ -327,14 +331,16 @@ export function Hero({ product }: HeroProps) {
                   className="h-full w-full object-cover"
                 >
                   <source src={DEMO_VIDEO_URL} type="video/mp4" />
-                  Your browser does not support the video tag.
+                  Your device legacy parser does not support secure HTML5 video delivery loops.
                 </video>
               </div>
 
-              {/* Optional caption */}
-              <p className="mt-3 text-center text-xs tracking-widest text-white/40">
-                SculptGlow™ Electric Gua Sha Massager Relaxing Demo Video
-              </p>
+              {/* Structural Footer Caption Tag */}
+              <div className="px-6 py-3.5 bg-stone-950 border-t border-white/5 text-center">
+                <p className="text-[10px] tracking-[0.2em] font-700 text-gold-400 uppercase">
+                  SculptGlow™ Smart Gua Sha Massager Treatment Film
+                </p>
+              </div>
             </motion.div>
           </motion.div>
         )}
