@@ -11,6 +11,7 @@ import { Reviews } from "../components/product/Reviews";
 import { FAQ } from "../components/home/FAQ";
 import { Shipping } from "../components/home/Shipping";
 import { Button } from "../components/ui/Button";
+import { Sparkles, ShieldCheck, Zap, RefreshCw } from "lucide-react";
 
 export function ProductPage() {
   const { handle } = useParams<{ handle: string }>();
@@ -47,24 +48,22 @@ export function ProductPage() {
 
   if (error || !product) {
     return (
-      <div className="min-h-[75vh] flex items-center justify-center px-4 bg-cream/50 selection:bg-gold-200">
-        <div className="max-w-md w-full text-center space-y-6 p-8 rounded-3xl bg-white border border-gold-100 shadow-sm reveal">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gold-50 text-gold-600 mb-2">
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
+      <div className="min-h-[80vh] flex items-center justify-center px-4 bg-cream/30 selection:bg-gold-200">
+        <div className="max-w-md w-full text-center space-y-6 p-10 rounded-3xl bg-white border border-gold-100 shadow-xl shadow-gold-900/[0.02] animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gold-50 text-gold-600 mb-2 border border-gold-100">
+            <Sparkles className="w-6 h-6 animate-pulse" />
           </div>
-          <h2 className="font-display font-700 text-3xl text-stone-900 tracking-tight">Product not found</h2>
-          <p className="text-stone-500 text-sm leading-relaxed">
-            We couldn't track down the specific piece you are looking for. It might have sold out or changed locations.
+          <h2 className="font-display font-700 text-3xl text-stone-900 tracking-tight">Collection Artifact Missing</h2>
+          <p className="text-stone-500 text-sm leading-relaxed font-sans font-400">
+            The specific luxury device you are looking for is currently unavailable or has been relocated within our registry.
           </p>
-          <code className="block bg-sand/40 rounded-xl px-4 py-3 text-xs font-mono text-stone-700 border border-gold-100 break-all select-all">
+          <code className="block bg-sand/30 rounded-xl px-4 py-3 text-xs font-mono text-stone-600 border border-gold-100/60 break-all select-all">
             "{handle ?? 'undefined'}"
           </code>
           <div className="pt-2">
             <Link to="/" className="block">
-              <Button className="w-full bg-stone-900 text-white hover:bg-stone-800 transition-all duration-200 py-3 rounded-xl shadow-sm">
-                ← Back to Home
+              <Button className="w-full bg-stone-900 text-white hover:bg-stone-800 transition-all duration-300 py-3.5 rounded-xl font-sans font-600 text-sm tracking-wider uppercase shadow-sm">
+                Return to Atelier
               </Button>
             </Link>
           </div>
@@ -78,69 +77,105 @@ export function ProductPage() {
   ) ?? product.variants[0];
 
   return (
-    <div className="bg-white min-h-screen antialiased selection:bg-gold-900 selection:text-white">
-      {/* Breadcrumb Navigation */}
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 text-[11px] tracking-widest uppercase text-stone-400 font-600">
+    <div className="bg-white min-h-screen antialiased selection:bg-stone-950 selection:text-white">
+      {/* Editorial Breadcrumb Navigation */}
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 text-[10px] tracking-[0.2em] uppercase text-stone-400 font-700">
         <Link to="/" className="hover:text-gold-600 transition-colors duration-150">Home</Link>
+        <span className="mx-3 text-stone-300">·</span>
+        <span className="hover:text-gold-600 transition-colors duration-150">Wellness Devices</span>
         <span className="mx-3 text-stone-300">/</span>
-        <span className="text-stone-900 font-700">{product.title}</span>
+        <span className="text-stone-900 font-800">{product.title}</span>
       </nav>
 
-      {/* Main Structural Block */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-14 pb-36 lg:pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 xl:gap-20">
+      {/* Main Split Layout Block */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-16 pb-36 lg:pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 xl:gap-24 items-start">
           
-          {/* Gallery Deck */}
-          <div className="lg:col-span-7 lg:sticky lg:top-28 lg:self-start reveal">
-            <div className="overflow-hidden rounded-3xl bg-cream border border-gold-100/40">
+          {/* Left: Interactive Media Wall Layer */}
+          <div className="lg:col-span-7 lg:sticky lg:top-28 lg:self-start">
+            <div className="relative group rounded-3xl overflow-hidden bg-cream border border-gold-100/40 shadow-sm p-4 sm:p-6 lg:p-8">
               <ProductGallery images={product.images} title={product.title} />
+              
+              {/* Luxury Product USP Tag Overlays for 2026 Conversion Rates */}
+              <div className="hidden sm:flex items-center gap-6 mt-8 pt-6 border-t border-gold-100/40 text-[11px] font-600 text-stone-500 tracking-wider uppercase justify-center">
+                <div className="flex items-center gap-2">
+                  <Zap className="w-4 h-4 text-gold-600" strokeWidth={1.5} />
+                  <span>Microcurrent Therapy</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <RefreshCw className="w-4 h-4 text-gold-600" strokeWidth={1.5} />
+                  <span>Sonic Kinetic Vibration</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-gold-600" strokeWidth={1.5} />
+                  <span>Dermatologist Approved</span>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Action Details Hub */}
-          <div className="lg:col-span-5 flex flex-col justify-between space-y-10">
-            <div className="space-y-8">
-              <ProductInfo
-                product={product}
-                selectedVariant={variant}
-                selectedOptions={selected}
-                onSelectOption={(name, value) => {
-                  startTransition(() => {
-                    setSelected((s) => ({ ...s, [name]: value }));
-                  });
-                }}
-              />
+          {/* Right: Architectural Checkout/Configuration Column */}
+          <div className="lg:col-span-5 space-y-10 lg:pt-2">
+            <div className="space-y-8 bg-cream/20 border border-gold-100/30 rounded-3xl p-6 sm:p-8 shadow-2xs">
+              <div className="space-y-2">
+                <span className="inline-flex items-center gap-1.5 text-[9px] font-800 tracking-[0.25em] uppercase text-gold-600 bg-gold-50 border border-gold-100 px-2.5 py-1 rounded-md">
+                  ✦ Next-Gen Skincare Essential
+                </span>
+                <ProductInfo
+                  product={product}
+                  selectedVariant={variant}
+                  selectedOptions={selected}
+                  onSelectOption={(name, value) => {
+                    startTransition(() => {
+                      setSelected((s) => ({ ...s, [name]: value }));
+                    });
+                  }}
+                />
+              </div>
               
-              <div className="pt-4 border-t border-stone-100">
+              <div className="pt-6 border-t border-gold-100/40">
                 <AddToCart product={product} variant={variant} />
               </div>
             </div>
 
-            {/* Content Context Block */}
-            <div id="story" className="pt-8 border-t border-stone-100">
-              <h3 className="text-[11px] font-700 tracking-widest uppercase text-gold-600 mb-4">The Story & Details</h3>
+            {/* Content Narrative Block */}
+            <div id="story" className="border border-stone-100 bg-white rounded-3xl p-6 sm:p-8 shadow-2xs space-y-5">
+              <div className="flex items-center justify-between border-b border-stone-100 pb-4">
+                <h3 className="text-[11px] font-700 tracking-[0.2em] uppercase text-gold-600">
+                  The Device & Architecture
+                </h3>
+                <span className="font-mono text-[10px] text-stone-400">MODEL RE-2026</span>
+              </div>
               <div
-                className="text-stone-800 leading-relaxed text-[15px] prose prose-stone max-w-none 
-                  prose-p:mb-4 prose-headings:font-display prose-headings:text-stone-900"
+                className="text-stone-700 leading-relaxed text-sm prose prose-stone max-w-none 
+                  prose-p:mb-4 prose-p:leading-relaxed prose-headings:font-display prose-headings:text-stone-900 prose-strong:text-stone-900"
                 dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
               />
             </div>
           </div>
         </div>
 
-        {/* Reviews section context */}
-        <section className="mt-28 pt-16 border-t border-stone-100">
-          <div className="max-w-4xl mx-auto">
+        {/* Dynamic Proof & Verification Layer */}
+        <section className="mt-32 pt-20 border-t border-stone-100">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center max-w-xl mx-auto mb-16 space-y-3">
+              <span className="text-[10px] font-700 tracking-[0.3em] uppercase text-gold-600 block">Verified Experience</span>
+              <h2 className="font-display font-700 text-3xl sm:text-4xl text-stone-900 tracking-tight">Real Results, Absolute Luxury</h2>
+            </div>
             <Reviews />
           </div>
         </section>
       </main>
 
-      <div className="bg-cream/40 border-t border-gold-100/60">
+      {/* Editorial Accordion Support System */}
+      <div className="bg-cream/40 border-t border-gold-100/50 py-10">
         <Shipping />
-        <FAQ />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gold-100/30">
+          <FAQ />
+        </div>
       </div>
 
+      {/* Smart Contextual Persistent Action Overlay */}
       <StickyCart product={product} variant={variant} />
     </div>
   );
@@ -148,27 +183,33 @@ export function ProductPage() {
 
 function ProductSkeleton() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12 xl:gap-20">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 xl:gap-24 animate-pulse">
       <div className="lg:col-span-7">
-        <Skeleton className="aspect-[4/5] sm:aspect-square w-full rounded-3xl bg-sand/40" />
+        <Skeleton className="aspect-square w-full rounded-3xl bg-cream border border-gold-100/30" />
+        <div className="flex gap-4 mt-6 justify-center">
+          <Skeleton className="h-4 w-28 bg-sand/40 rounded" />
+          <Skeleton className="h-4 w-28 bg-sand/40 rounded" />
+          <Skeleton className="h-4 w-28 bg-sand/40 rounded" />
+        </div>
       </div>
-      <div className="lg:col-span-5 space-y-6 py-2">
-        <Skeleton className="h-4 w-1/4 bg-sand/60 rounded" />
-        <Skeleton className="h-10 w-3/4 bg-stone-100 rounded-xl" />
-        <Skeleton className="h-5 w-1/3 bg-sand/40 rounded" />
-        <div className="h-px bg-stone-100 my-8" />
+      <div className="lg:col-span-5 space-y-8 bg-cream/10 border border-gold-100/20 rounded-3xl p-8">
+        <div className="space-y-4">
+          <Skeleton className="h-4 w-1/4 bg-gold-200/50 rounded" />
+          <Skeleton className="h-12 w-11/12 bg-stone-100 rounded-xl" />
+          <Skeleton className="h-6 w-1/3 bg-sand/40 rounded" />
+        </div>
+        <div className="h-px bg-gold-100/40 my-6" />
         <div className="space-y-3">
-          <Skeleton className="h-4 w-16 bg-sand/50 rounded" />
-          <div className="flex gap-2">
-            <Skeleton className="h-10 w-20 bg-stone-50 rounded-lg" />
-            <Skeleton className="h-10 w-20 bg-stone-50 rounded-lg" />
+          <Skeleton className="h-4 w-16 bg-sand/40 rounded" />
+          <div className="flex gap-3">
+            <Skeleton className="h-11 w-24 bg-stone-50 rounded-xl" />
+            <Skeleton className="h-11 w-24 bg-stone-50 rounded-xl" />
           </div>
         </div>
-        <Skeleton className="h-14 w-full bg-stone-900/5 rounded-2xl mt-8" />
-        <div className="space-y-3 pt-8">
+        <Skeleton className="h-14 w-full bg-stone-900/10 rounded-xl mt-8" />
+        <div className="space-y-3 pt-6 border-t border-gold-100/20">
           <Skeleton className="h-4 bg-sand/30 w-full rounded" />
           <Skeleton className="h-4 bg-sand/30 w-5/6 rounded" />
-          <Skeleton className="h-4 bg-sand/30 w-2/3 rounded" />
         </div>
       </div>
     </div>
